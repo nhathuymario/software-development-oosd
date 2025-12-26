@@ -13,6 +13,15 @@
   <component name="ComposerSettings">
     <execution />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/nhathuymario/software-development-oosd.git",
+    "accountId": "83f367a8-4448-4793-8188-9a2c3324defe"
+  }
+}]]></component>
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
 }</component>
@@ -39,8 +48,10 @@
     "RequestMappingsPanelWidth0": "75",
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "Spring Boot.GatewayServiceApplication.executor": "Run",
     "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "E:/XDOOSD/OOSD",
     "node.js.detected.package.eslint": "true",
@@ -151,7 +162,7 @@
       <updated>1766758276143</updated>
       <workItem from="1766758277709" duration="1668000" />
       <workItem from="1766760330671" duration="535000" />
-      <workItem from="1766760992958" duration="724000" />
+      <workItem from="1766760992958" duration="1046000" />
     </task>
     <servers />
   </component>
