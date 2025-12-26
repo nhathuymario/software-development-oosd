@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/backend/auth-service/auth-service/pom.xml" />
+        <option value="$PROJECT_DIR$/backend/auth-service/pom.xml" />
+        <option value="$PROJECT_DIR$/backend/cart-service/pom.xml" />
+        <option value="$PROJECT_DIR$/backend/catalog-service/pom.xml" />
+        <option value="$PROJECT_DIR$/backend/gateway-service/pom.xml" />
+        <option value="$PROJECT_DIR$/backend/order-service/pom.xml" />
+        <option value="$PROJECT_DIR$/backend/payment-service/pom.xml" />
+        <option value="$PROJECT_DIR$/backend/user-service/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_25" default="true" project-jdk-name="25" project-jdk-type="JavaSDK" />
+</project>

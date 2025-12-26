@@ -1,0 +1,18 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: gateway-service
+cloud:
+  gateway:
+    routes:
+      - id: catalog
+        uri: http://localhost:8082
+        predicates:
+          - Path=/api/catalog/**
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
