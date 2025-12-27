@@ -1,3 +1,18 @@
+server:
+  port: 8086
+
 spring:
   application:
     name: user-service
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/user_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Ho_Chi_Minh
+    username: root
+    password: 123456
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+jwt:
+  secret: "my-super-secret-key-which-is-at-least-32-chars!"

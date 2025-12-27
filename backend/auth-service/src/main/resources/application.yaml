@@ -1,3 +1,21 @@
+server:
+  port: 8081
+
 spring:
   application:
     name: auth-service
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/auth_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Ho_Chi_Minh
+    username: root
+    password: 123456
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+jwt:
+  # QUAN TRỌNG: phải >= 32 ký tự cho HS256
+  secret: "my-super-secret-key-which-is-at-least-32-chars!"
+  expirationMs: 3600000
