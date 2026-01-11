@@ -1,3 +1,21 @@
+server:
+  port: 8082
+
 spring:
   application:
-    name: cart-service
+    name: cart-service  # <--- SỬA LẠI: Đừng để là user-service nữa
+  datasource:
+    url: jdbc:mysql://localhost:3307/db_cart?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: root
+    password: ""
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+# --- THÊM ĐOẠN NÀY ĐỂ TẮT LỖI ĐỎ EUREKA ---
+eureka:
+  client:
+    enabled: false
+    register-with-eureka: false
+    fetch-registry: false

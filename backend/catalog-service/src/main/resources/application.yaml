@@ -1,3 +1,18 @@
+server:
+  port: 8085
+
 spring:
   application:
     name: catalog-service
+  datasource:
+    url: jdbc:mysql://localhost:3307/db_catalog?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: root
+    password: ""
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+eureka:
+  client:
+    enabled: false # Tắt Eureka cho đỡ lỗi
