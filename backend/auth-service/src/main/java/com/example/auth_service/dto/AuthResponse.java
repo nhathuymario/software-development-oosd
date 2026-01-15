@@ -1,12 +1,10 @@
 package com.example.auth_service.dto;
-
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-
+import lombok.Data;
 import java.util.List;
 
-@Getter
-@AllArgsConstructor
+@Data
+@AllArgsConstructor // Quan trọng: Để tạo constructor có tham số
 public class AuthResponse {
     private String token;
     private String username;

@@ -1,3 +1,20 @@
+server:
+  port: 8083
+
 spring:
   application:
     name: order-service
+  datasource:
+    # Kết nối vào db_order (Nhớ tạo db này trong phpMyAdmin trước nhé)
+    url: jdbc:mysql://localhost:3307/db_order?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: root
+    password: ""
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+# Tắt Eureka để tránh lỗi đỏ
+eureka:
+  client:
+    enabled: false

@@ -1,11 +1,8 @@
 package com.example.auth_service.dto;
+import lombok.Data;
 
-import jakarta.validation.constraints.NotBlank;
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter @Setter
+@Data
 public class LoginRequest {
-    @NotBlank private String username;
-    @NotBlank private String password;
+    private String username;
+    private String password;
 }

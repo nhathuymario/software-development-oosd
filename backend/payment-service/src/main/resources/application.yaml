@@ -1,3 +1,18 @@
+server:
+  port: 8084
+
 spring:
   application:
     name: payment-service
+  datasource:
+    url: jdbc:mysql://localhost:3307/db_payment?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: root
+    password: ""
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+eureka:
+  client:
+    enabled: false

@@ -4,20 +4,64 @@ server:
 spring:
   application:
     name: gateway-service
-cloud:
-  gateway:
-    routes:
-      - id: auth-service
-        uri: http://localhost:8081
-        predicates:
-          - Path=/api/auth/**
+  cloud:
+    gateway:
+      routes:
+        # 1. AUTH SERVICE (Không chặn - Để người ta còn đăng nhập)
+        - id: auth-service
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/auth/**
 
-      - id: user-service
-        uri: http://localhost:8086
-        predicates:
-          - Path=/api/users/**
+        # 2. CATALOG SERVICE (Không chặn - Để xem hàng thoải mái)
+        - id: catalog-service
+          uri: http://localhost:8085
+          predicates:
+            - Path=/api/products/**
+
+        # 3. USER SERVICE (Không chặn - Hoặc chặn tùy bạn, ở đây tôi để mở cho Cart gọi sang)
+        - id: user-service
+          uri: http://localhost:8086
+          predicates:
+            - Path=/api/users/**
+
+        # ----------------------------------------------------
+        # NHỮNG SERVICE CẦN ĐĂNG NHẬP (THÊM filters: AuthenticationFilter)
+        # ----------------------------------------------------
+
+        # 4. CART SERVICE (Cần đăng nhập)
+        - id: cart-service
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/cart/**
+          filters:
+            - AuthenticationFilter
+
+        # 5. ORDER SERVICE (Cần đăng nhập)
+        - id: order-service
+          uri: http://localhost:8083
+          predicates:
+            - Path=/api/orders/**
+          filters:
+            - AuthenticationFilter
+
+        # 6. PAYMENT SERVICE (Cần đăng nhập)
+        - id: payment-service
+          uri: http://localhost:8084
+          predicates:
+            - Path=/api/payments/**
+          filters:
+            - AuthenticationFilter
 management:
   endpoints:
     web:
       exposure:
         include: health,info
+
+
+# THÊM ĐOẠN NÀY ĐỂ TẮT EUREKA
+eureka:
+  client:
+    enabled: false
+    register-with-eureka: false
+    fetch-registry: false

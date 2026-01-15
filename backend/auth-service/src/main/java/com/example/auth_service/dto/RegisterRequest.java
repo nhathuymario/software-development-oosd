@@ -1,11 +1,9 @@
 package com.example.auth_service.dto;
+import lombok.Data;
 
-import jakarta.validation.constraints.NotBlank;
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter @Setter
+@Data
 public class RegisterRequest {
-    @NotBlank private String username;
-    @NotBlank private String password;
+    private String username;
+    private String password;
+    // Có thể thêm email, fullName nếu muốn mở rộng sau này
 }
