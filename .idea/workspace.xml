@@ -4,65 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fea32ca5-cf88-43a0-a688-9011154c756d" name="Changes" comment=".">
-      <change afterPath="$PROJECT_DIR$/backend/auth-service/src/main/java/com/example/auth_service/config/AuthConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/auth-service/src/main/java/com/example/auth_service/controller/AuthController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/auth-service/src/main/java/com/example/auth_service/dto/AuthResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/auth-service/src/main/java/com/example/auth_service/dto/LoginRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/auth-service/src/main/java/com/example/auth_service/dto/RegisterRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/auth-service/src/main/java/com/example/auth_service/security/JwtService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/cart-service/src/main/java/com/example/cart_service/client/CatalogClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/cart-service/src/main/java/com/example/cart_service/controller/CartController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/cart-service/src/main/java/com/example/cart_service/dto/ProductDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/cart-service/src/main/java/com/example/cart_service/dto/UserDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/cart-service/src/main/java/com/example/cart_service/entity/Cart.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/cart-service/src/main/java/com/example/cart_service/entity/CartItem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/cart-service/src/main/java/com/example/cart_service/repository/CartRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/cart-service/src/main/java/com/example/cart_service/service/CartService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/catalog-service/src/main/java/com/example/catalog_service/controller/ProductController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/catalog-service/src/main/java/com/example/catalog_service/entity/Product.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/catalog-service/src/main/java/com/example/catalog_service/repository/ProductRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/catalog-service/src/main/java/com/example/catalog_service/service/ProductService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/gateway-service/src/main/java/com/example/gateway_service/filter/AuthenticationFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/gateway-service/src/main/java/com/example/gateway_service/util/JwtUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/order-service/src/main/java/com/example/order_service/client/CartClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/order-service/src/main/java/com/example/order_service/controller/OrderController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/order-service/src/main/java/com/example/order_service/dto/CartDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/order-service/src/main/java/com/example/order_service/dto/CartItemDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/order-service/src/main/java/com/example/order_service/dto/UserDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/order-service/src/main/java/com/example/order_service/entity/Order.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/order-service/src/main/java/com/example/order_service/entity/OrderItem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/order-service/src/main/java/com/example/order_service/entity/OrderStatus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/order-service/src/main/java/com/example/order_service/repository/OrderRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/order-service/src/main/java/com/example/order_service/service/OrderService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/payment-service/src/main/java/com/example/payment_service/client/OrderClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/payment-service/src/main/java/com/example/payment_service/controller/PaymentController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/payment-service/src/main/java/com/example/payment_service/dto/OrderDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/payment-service/src/main/java/com/example/payment_service/entity/Payment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/payment-service/src/main/java/com/example/payment_service/repository/PaymentRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/payment-service/src/main/java/com/example/payment_service/service/PaymentService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/user-service/src/main/java/com/example/user_service/controller/UserProfileController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/user-service/src/main/java/com/example/user_service/repository/UserProfileRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/user-service/src/main/java/com/example/user_service/service/UserProfileService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="fea32ca5-cf88-43a0-a688-9011154c756d" name="Changes" comment="add frontend">
+      <change afterPath="$PROJECT_DIR$/frontend/src/assets/css/Header.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/Footer.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/Header.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/auth-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/auth-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/cart-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/cart-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/cart-service/src/main/java/com/example/cart_service/CartServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/cart-service/src/main/java/com/example/cart_service/CartServiceApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/cart-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/cart-service/src/main/resources/application.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/catalog-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/catalog-service/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/gateway-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/gateway-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/gateway-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/gateway-service/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/order-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/order-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/order-service/src/main/java/com/example/order_service/OrderServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/order-service/src/main/java/com/example/order_service/OrderServiceApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/order-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/order-service/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/payment-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/payment-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/payment-service/src/main/java/com/example/payment_service/PaymentServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/payment-service/src/main/java/com/example/payment_service/PaymentServiceApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/payment-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/payment-service/src/main/resources/application.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/user-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/user-service/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/index.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,12 +43,12 @@
     &quot;assignee&quot;: &quot;nhathuymario&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/nhathuymario/software-development-oosd.git&quot;,
-    &quot;accountId&quot;: &quot;462e151e-9b81-477b-9017-f8e6d6ab81cb&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/nhathuymario/software-development-oosd.git",
+    "accountId": "83f367a8-4448-4793-8188-9a2c3324defe"
   }
-}</component>
+}]]></component>
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
 }</component>
@@ -145,6 +100,7 @@
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "run.configurations.included.in.services": "true",
+    "ts.external.directory.path": "E:\\XDOOSD\\OOSD\\frontend\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -153,6 +109,7 @@
       <recent name="C:\software-development-oosd\backend\cart-service\src\main\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\XDOOSD\OOSD\frontend\src" />
       <recent name="C:\software-development-oosd\backend\gateway-service\src\main\java\com\example\gateway_service" />
       <recent name="C:\software-development-oosd\backend" />
     </key>
@@ -243,7 +200,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-30f59d01ecdd-cffe25b9f5b3-intellij.indexing.shared.core-IU-253.28294.334" />
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.28238.7" />
+        <option value="bundled-js-predefined-d6986cc7102b-a71380e98a7c-JavaScript-IU-252.28238.7" />
       </set>
     </attachedChunks>
   </component>
@@ -258,6 +216,7 @@
       <workItem from="1766760330671" duration="535000" />
       <workItem from="1766760992958" duration="1360000" />
       <workItem from="1768013769461" duration="18279000" />
+      <workItem from="1768484600222" duration="1008000" />
     </task>
     <task id="LOCAL-00001" summary=".">
       <option name="closed" value="true" />
@@ -267,7 +226,23 @@
       <option name="project" value="LOCAL" />
       <updated>1766762292511</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="merge">
+      <option name="closed" value="true" />
+      <created>1768479078938</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1768479078938</updated>
+    </task>
+    <task id="LOCAL-00003" summary="add frontend">
+      <option name="closed" value="true" />
+      <created>1768485008682</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1768485008682</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -275,7 +250,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="." />
-    <option name="LAST_COMMIT_MESSAGE" value="." />
+    <MESSAGE value="merge" />
+    <MESSAGE value="add frontend" />
+    <option name="LAST_COMMIT_MESSAGE" value="add frontend" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

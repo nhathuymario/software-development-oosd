@@ -1,0 +1,78 @@
+.header {
+    position: sticky;   /* hoặc fixed nếu bạn muốn luôn luôn ở top */
+    top: 0;
+    z-index: 1000;
+
+    width: 100%;
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    background-color: #ffd400;
+    padding: 0 24px;
+    height: 64px;
+}
+
+/* LEFT */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 0 0 auto;
+}
+
+.logo-placeholder {
+    width: 40px;
+    height: 40px;
+    background-color: #fff;
+    border-radius: 6px;
+    border: 1px dashed #ccc;
+}
+
+.shop-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: #000;
+}
+
+/* CENTER: search co giãn */
+.header-center {
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: center;
+}
+
+.search-input {
+    width: min(600px, 100%);
+    height: 38px;
+    border-radius: 20px;
+    border: none;
+    padding: 0 16px;
+    font-size: 14px;
+    outline: none;
+}
+
+/* RIGHT: đẩy sát phải */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex: 0 0 auto;
+    margin-left: auto;
+}
+
+.header-btn {
+    background: transparent;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.cart-btn {
+    background-color: #fff;
+    padding: 8px 14px;
+    border-radius: 20px;
+}
