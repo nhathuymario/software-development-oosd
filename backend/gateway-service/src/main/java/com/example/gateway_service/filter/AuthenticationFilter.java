@@ -7,6 +7,8 @@ import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFac
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class AuthenticationFilter extends AbstractGatewayFilterFactory<AuthenticationFilter.Config> {
 
@@ -19,29 +21,33 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
 
     @Override
     public GatewayFilter apply(Config config) {
-        return ((exchange, chain) -> {
-            // Kiểm tra xem request có header Authorization không
-            if (!exchange.getRequest().getHeaders().containsKey(HttpHeaders.AUTHORIZATION)) {
+        return (exchange, chain) -> {
+
+            String authHeader = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
+            if (authHeader == null || !authHeader.startsWith("Bearer ")) {
                 throw new RuntimeException("Thiếu Header Authorization (Chưa đăng nhập)");
             }
 
-            String authHeader = exchange.getRequest().getHeaders().get(HttpHeaders.AUTHORIZATION).get(0);
-            if (authHeader != null && authHeader.startsWith("Bearer ")) {
-                authHeader = authHeader.substring(7); // Cắt bỏ chữ "Bearer " lấy token
-            }
+            String token = authHeader.substring(7);
 
-            try {
-                // Kiểm tra tính hợp lệ của Token
-                jwtUtil.validateToken(authHeader);
-            } catch (Exception e) {
-                System.out.println("Token không hợp lệ: " + e.getMessage());
-                throw new RuntimeException("Token không hợp lệ hoặc đã hết hạn!");
+            // validate + lấy roles
+            jwtUtil.validateToken(token);
+            List<String> roles = jwtUtil.getRoles(token);
+
+            if (config.requiredRole != null && !config.requiredRole.isBlank()) {
+                if (!roles.contains(config.requiredRole)) {
+                    throw new RuntimeException("Không đủ quyền: cần " + config.requiredRole);
+                }
             }
 
             return chain.filter(exchange);
-        });
+        };
     }
 
     public static class Config {
+        private String requiredRole;
+
+        public String getRequiredRole() { return requiredRole; }
+        public void setRequiredRole(String requiredRole) { this.requiredRole = requiredRole; }
     }
 }

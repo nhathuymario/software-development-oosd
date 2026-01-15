@@ -18,7 +18,12 @@ spring:
           uri: http://localhost:8085
           predicates:
             - Path=/api/products/**
-
+            - name: AuthorizationFilter
+          filters:
+            - AuthenticationFilter
+            - name: AuthorizationFilter
+              args:
+                requiredRole: ROLE_ADMIN
         # 3. USER SERVICE (Không chặn - Hoặc chặn tùy bạn, ở đây tôi để mở cho Cart gọi sang)
         - id: user-service
           uri: http://localhost:8086
@@ -35,7 +40,10 @@ spring:
           predicates:
             - Path=/api/cart/**
           filters:
-            - AuthenticationFilter
+          - AuthenticationFilter
+          - name: AuthorizationFilter
+            args:
+              requiredRole: ROLE_USER
 
         # 5. ORDER SERVICE (Cần đăng nhập)
         - id: order-service
@@ -44,7 +52,9 @@ spring:
             - Path=/api/orders/**
           filters:
             - AuthenticationFilter
-
+            - name: AuthorizationFilter
+              args:
+                requiredRole: ROLE_USER
         # 6. PAYMENT SERVICE (Cần đăng nhập)
         - id: payment-service
           uri: http://localhost:8084
@@ -52,6 +62,10 @@ spring:
             - Path=/api/payments/**
           filters:
             - AuthenticationFilter
+            - name: AuthorizationFilter
+              args:
+                requiredRole: ROLE_USER
+
 management:
   endpoints:
     web:
