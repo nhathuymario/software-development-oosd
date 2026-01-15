@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import "../assets/css/pages/LoginPage.css";
 import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
@@ -11,10 +12,11 @@ const LoginPage = () => {
         e.preventDefault();
 
         try {
-            const res = await axios.post("http://localhost:8080/auth/login", {
+            const res = await axios.post("http://localhost:8080/api/auth/login", {
                 username,
                 password,
             });
+
 
             const token = res.data.token;
             localStorage.setItem("token", token);
@@ -34,28 +36,31 @@ const LoginPage = () => {
     };
 
     return (
-        <div style={{ maxWidth: 360, margin: "80px auto" }}>
-            <h2>Đăng nhập</h2>
+        <div className="login-page">
+            <div className="login-card">
+                <div className="login-title">Đăng nhập</div>
 
-            <form onSubmit={handleLogin}>
-                <input
-                    placeholder="Username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    style={{ width: "100%", marginBottom: 12 }}
-                />
+                <form className="login-form" onSubmit={handleLogin}>
+                    <input
+                        className="login-input"
+                        placeholder="Username"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
 
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    style={{ width: "100%", marginBottom: 12 }}
-                />
+                    <input
+                        className="login-input"
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
 
-                <button style={{ width: "100%" }}>Đăng nhập</button>
-            </form>
+                    <button className="login-button">Đăng nhập</button>
+                </form>
+            </div>
         </div>
+
     );
 };
 

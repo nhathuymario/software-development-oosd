@@ -10,7 +10,8 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class AuthenticationFilter extends AbstractGatewayFilterFactory<AuthenticationFilter.Config> {
+public class AuthenticationFilter
+        extends AbstractGatewayFilterFactory<AuthenticationFilter.Config> {
 
     @Autowired
     private JwtUtil jwtUtil;
@@ -19,24 +20,32 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
         super(Config.class);
     }
 
+    // ✅ ĐẶT Ở ĐÂY
+    @Override
+    public String name() {
+        return "Authentication";
+    }
+
     @Override
     public GatewayFilter apply(Config config) {
         return (exchange, chain) -> {
 
-            String authHeader = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
+            String authHeader =
+                    exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
+
             if (authHeader == null || !authHeader.startsWith("Bearer ")) {
                 throw new RuntimeException("Thiếu Header Authorization (Chưa đăng nhập)");
             }
 
             String token = authHeader.substring(7);
 
-            // validate + lấy roles
             jwtUtil.validateToken(token);
             List<String> roles = jwtUtil.getRoles(token);
 
             if (config.requiredRole != null && !config.requiredRole.isBlank()) {
                 if (!roles.contains(config.requiredRole)) {
-                    throw new RuntimeException("Không đủ quyền: cần " + config.requiredRole);
+                    throw new RuntimeException(
+                            "Không đủ quyền: cần " + config.requiredRole);
                 }
             }
 
@@ -44,10 +53,16 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
         };
     }
 
+    // ⚠️ KHÔNG đặt name() trong class này
     public static class Config {
         private String requiredRole;
 
-        public String getRequiredRole() { return requiredRole; }
-        public void setRequiredRole(String requiredRole) { this.requiredRole = requiredRole; }
+        public String getRequiredRole() {
+            return requiredRole;
+        }
+
+        public void setRequiredRole(String requiredRole) {
+            this.requiredRole = requiredRole;
+        }
     }
 }

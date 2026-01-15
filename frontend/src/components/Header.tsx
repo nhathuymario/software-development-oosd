@@ -1,15 +1,18 @@
-import "../assets/css/Header.css";
+import { useNavigate } from "react-router-dom";
+import "../assets/css/components/Header.css";
 
 const Header = () => {
+    const navigate = useNavigate();
+
     return (
         <header className="header">
-            {/* Left: Logo + Shop name */}
+            {/* LEFT */}
             <div className="header-left">
                 <div className="logo-placeholder"></div>
                 <span className="shop-name">MiniStore</span>
             </div>
 
-            {/* Center: Search */}
+            {/* CENTER */}
             <div className="header-center">
                 <input
                     type="text"
@@ -18,9 +21,15 @@ const Header = () => {
                 />
             </div>
 
-            {/* Right: Login + Cart */}
+            {/* RIGHT */}
             <div className="header-right">
-                <button className="header-btn">Đăng nhập</button>
+                <button
+                    className="header-btn"
+                    onClick={() => navigate("/login")}
+                >
+                    Đăng nhập
+                </button>
+
                 <button className="header-btn cart-btn">Giỏ hàng</button>
             </div>
         </header>
