@@ -16,10 +16,10 @@ import org.springframework.security.web.SecurityFilterChain;
 public class AuthConfig {
 
     // 1. ĐÂY LÀ BEAN BẠN ĐANG THIẾU
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(); // Dùng thuật toán BCrypt để mã hóa
-    }
+//    @Bean
+//    public PasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder(); // Dùng thuật toán BCrypt để mã hóa
+//    }
 
     // 2. Cấu hình bảo mật cơ bản (Mở cửa cho API auth)
     @Bean

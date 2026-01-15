@@ -1,18 +1,17 @@
 package com.example.user_service.controller;
 
 import com.example.user_service.entity.UserProfile;
-import com.example.user_service.repository.IUserProfileRepository;
-import com.example.user_service.repository.IUserProfileRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import com.example.user_service.repository.UserProfileRepository;
 
 @RestController
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
 public class UserController {
 
-    private final IUserProfileRepository repo;
+    private final UserProfileRepository repo;
 
     @PostMapping("/me")
     public UserProfile createOrUpdateProfile(
