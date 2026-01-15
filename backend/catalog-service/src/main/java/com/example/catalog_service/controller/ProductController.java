@@ -10,24 +10,19 @@ import java.util.List;
 @RequestMapping("/api/products")
 public class ProductController {
 
-    @Autowired
-    private ProductService productService;
+    private final ProductService productService;
 
-    // Lấy danh sách: GET /api/products
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
+
     @GetMapping
     public List<Product> getAll() {
-        return productService.getAllProducts();
+        return productService.getAll();
     }
 
-    // Lấy chi tiết: GET /api/products/{id}
     @GetMapping("/{id}")
-    public Product getOne(@PathVariable Long id) {
-        return productService.getProductById(id);
-    }
-
-    // Tạo mới (cho Admin): POST /api/products
-    @PostMapping
-    public Product create(@RequestBody Product product) {
-        return productService.createProduct(product);
+    public Product getById(@PathVariable Long id) {
+        return productService.getById(id);
     }
 }
