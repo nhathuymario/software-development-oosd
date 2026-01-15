@@ -4,25 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fea32ca5-cf88-43a0-a688-9011154c756d" name="Changes" comment="service auth">
-      <change afterPath="$PROJECT_DIR$/backend/auth-service/src/main/java/com/example/auth_service/SecurityConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/auth-service/src/main/java/com/example/auth_service/config/DataInitializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/auth-service/src/main/java/com/example/auth_service/config/PasswordConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/auth-service/src/main/java/com/example/auth_service/controller/AuthController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/auth-service/src/main/java/com/example/auth_service/dto/AuthResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/auth-service/src/main/java/com/example/auth_service/dto/LoginRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/auth-service/src/main/java/com/example/auth_service/dto/RegisterRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/auth-service/src/main/java/com/example/auth_service/security/JwtService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/user-service/src/main/java/com/example/user_service/controller/UserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/user-service/src/main/java/com/example/user_service/repository/IUserProfileRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/user-service/src/main/java/com/example/user_service/security/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/auth-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/auth-service/src/main/java/com/example/auth_service/AuthServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/src/main/java/com/example/auth_service/AuthServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/user-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/user-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/user-service/src/main/java/com/example/user_service/UserServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/user-service/src/main/java/com/example/user_service/UserServiceApplication.java" afterDir="false" />
-    </list>
+    <list default="true" id="fea32ca5-cf88-43a0-a688-9011154c756d" name="Changes" comment="commit." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -217,6 +199,7 @@
       <workItem from="1766760992958" duration="10612000" />
       <workItem from="1766801098141" duration="29000" />
       <workItem from="1766801154634" duration="2584000" />
+      <workItem from="1767781049242" duration="220000" />
     </task>
     <task id="LOCAL-00001" summary=".">
       <option name="closed" value="true" />
@@ -258,7 +241,15 @@
       <option name="project" value="LOCAL" />
       <updated>1766802669641</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="commit.">
+      <option name="closed" value="true" />
+      <created>1767781183579</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1767781183579</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -270,6 +261,7 @@
     <MESSAGE value="entity auth, user" />
     <MESSAGE value="repository auth" />
     <MESSAGE value="service auth" />
-    <option name="LAST_COMMIT_MESSAGE" value="service auth" />
+    <MESSAGE value="commit." />
+    <option name="LAST_COMMIT_MESSAGE" value="commit." />
   </component>
 </project>
