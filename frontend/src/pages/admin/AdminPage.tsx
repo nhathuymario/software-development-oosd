@@ -1,0 +1,2 @@
+const AdminPage = () => <h1>Trang Admin</h1>;
+export default AdminPage;

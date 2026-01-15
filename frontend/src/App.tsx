@@ -1,17 +1,37 @@
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import MainLayout from "./layouts/MainLayout";
+import HomePage from "./pages/home/HomePage";
+import LoginPage from "./pages/LoginPage";
+import AdminPage from "./pages/admin/AdminPage";
+import ForbiddenPage from "./pages/ForbiddenPage/ForbiddenPage";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
     return (
-        <>
-            <Header />
+        <BrowserRouter>
+            <Routes>
 
-            <main style={{ minHeight: "calc(100vh - 64px - 220px)" }}>
-                {/* Nội dung trang */}
-            </main>
+                {/* Layout có Header + Footer */}
+                <Route element={<MainLayout />}>
+                    <Route path="/" element={<HomePage />} />
+                </Route>
 
-            <Footer />
-        </>
+                {/* Không có Header / Footer */}
+                <Route path="/login" element={<LoginPage />} />
+
+                <Route
+                    path="/admin"
+                    element={
+                        <ProtectedRoute role="ROLE_ADMIN">
+                            <AdminPage />
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route path="/403" element={<ForbiddenPage />} />
+
+            </Routes>
+        </BrowserRouter>
     );
 }
 
