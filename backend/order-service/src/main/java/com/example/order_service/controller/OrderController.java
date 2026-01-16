@@ -6,6 +6,8 @@ import com.example.order_service.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/orders")
 public class OrderController {
@@ -15,6 +17,12 @@ public class OrderController {
 
     @Autowired
     private OrderRepository orderRepository; // <--- Thêm cái này để tìm đơn hàng
+
+    @GetMapping
+    public List<Order> getOrdersByUserId(@RequestParam Long userId) {
+        return orderRepository.findByUserId(userId);
+    }
+
 
     // API Đặt hàng (Giữ nguyên)
     @PostMapping("/place")

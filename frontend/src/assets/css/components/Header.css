@@ -76,3 +76,48 @@
     padding: 8px 14px;
     border-radius: 20px;
 }
+/* USER BADGE */
+.user-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #ffffff;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-weight: 700;
+    color: #222;
+    cursor: pointer;
+    transition: box-shadow 0.15s ease, transform 0.1s ease;
+}
+
+.user-badge:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    transform: translateY(-1px);
+}
+
+.user-avatar {
+    font-size: 16px;
+}
+
+.username {
+    font-size: 14px;
+}
+
+/* LOGIN */
+.login-btn {
+    background: #ffffff;
+    border-radius: 999px;
+    padding: 6px 16px;
+    font-weight: 700;
+}
+
+/* CART */
+.cart-btn {
+    background: #ffffff;
+    border-radius: 999px;
+    padding: 6px 16px;
+    font-weight: 700;
+    border: none;
+}
+
+

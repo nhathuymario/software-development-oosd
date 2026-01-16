@@ -19,7 +19,7 @@ const LoginPage = () => {
 
 
             const token = res.data.token;
-            localStorage.setItem("token", token);
+            sessionStorage.setItem("token", token);
 
             // decode JWT để lấy role (đơn giản)
             const payload = JSON.parse(atob(token.split(".")[1]));

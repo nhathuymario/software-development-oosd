@@ -1,10 +1,13 @@
 package com.example.user_service.controller;
 
 import com.example.user_service.entity.UserProfile;
+import jakarta.persistence.criteria.Order;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import com.example.user_service.repository.UserProfileRepository;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
@@ -48,4 +51,6 @@ public class UserController {
         return repo.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("Profile not found"));
     }
+
+
 }

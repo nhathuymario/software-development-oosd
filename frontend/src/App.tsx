@@ -5,6 +5,7 @@ import LoginPage from "./pages/LoginPage";
 import AdminPage from "./pages/admin/AdminPage";
 import ForbiddenPage from "./pages/ForbiddenPage/ForbiddenPage";
 import ProtectedRoute from "./components/ProtectedRoute";
+import UserDetailPage from "./pages/user/UserDetailPage";
 
 function App() {
     return (
@@ -14,10 +15,6 @@ function App() {
                 {/* Layout có Header + Footer */}
                 <Route element={<MainLayout />}>
                     <Route path="/" element={<HomePage />} />
-                </Route>
-
-                {/* Không có Header / Footer */}
-                <Route path="/login" element={<LoginPage />} />
 
                 <Route
                     path="/admin"
@@ -27,7 +24,17 @@ function App() {
                         </ProtectedRoute>
                     }
                 />
-
+                    <Route
+                        path="/user"
+                        element={
+                            <ProtectedRoute>
+                                <UserDetailPage />
+                            </ProtectedRoute>
+                        }
+                    />
+                </Route>
+                {/* Không có Header / Footer */}
+                <Route path="/login" element={<LoginPage />} />
                 <Route path="/403" element={<ForbiddenPage />} />
 
             </Routes>

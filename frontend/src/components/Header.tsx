@@ -1,8 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import "../assets/css/components/Header.css";
+import {
+    isAuthenticated,
+    getUsername,
+} from "../services/auth";
 
 const Header = () => {
     const navigate = useNavigate();
+
+    const authenticated = isAuthenticated();
+    const username = getUsername();
+
 
     return (
         <header className="header">
@@ -23,15 +31,27 @@ const Header = () => {
 
             {/* RIGHT */}
             <div className="header-right">
-                <button
-                    className="header-btn"
-                    onClick={() => navigate("/login")}
-                >
-                    Đăng nhập
-                </button>
+                {!authenticated ? (
+                    <button
+                        className="header-btn login-btn"
+                        onClick={() => navigate("/login")}
+                    >
+                        Đăng nhập
+                    </button>
+                ) : (
+                    <div
+                        className="user-badge"
+                        onClick={() => navigate("/user")}
+                        title="Xem tài khoản"
+                    >
+                        <span className="user-avatar">👤</span>
+                        <span className="username">{username ?? "User"}</span>
+                    </div>
+                )}
 
                 <button className="header-btn cart-btn">Giỏ hàng</button>
             </div>
+
         </header>
     );
 };
