@@ -1,7 +1,6 @@
 package com.example.catalog_service.controller;
 
 import com.example.catalog_service.entity.Product;
-import com.example.catalog_service.service.ProductService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
