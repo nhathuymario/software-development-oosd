@@ -22,4 +22,6 @@ public class Product {
     private Integer stock;      // Số lượng tồn kho
 
     private String imageUrl;    // Link ảnh
+
+    private Long categoryId;
 }
