@@ -1,0 +1,83 @@
+/* Messages */
+.ud-note--error {
+    color: crimson;
+}
+
+.ud-note--success {
+    color: #12b76a;
+    font-weight: 700;
+}
+
+/* Section title */
+.ud-h3--upper {
+    text-transform: uppercase;
+}
+
+/* View row (Name - Phone + Edit) */
+.pap-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+}
+
+.pap-row__text {
+    font-weight: 700;
+}
+
+/* "Sửa" button like a link */
+.pap-edit-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: #0b63f6;
+    font-weight: 700;
+    padding: 0;
+}
+
+.pap-edit-btn__icon {
+    line-height: 1;
+}
+
+/* Edit form layout */
+.pap-edit {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-top: 8px;
+}
+
+.pap-edit__field {
+    flex: 1;
+    min-width: 240px;
+}
+
+/* Edit actions */
+.pap-edit__actions {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+}
+
+.pap-link-btn {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-weight: 700;
+    padding: 0;
+}
+
+.pap-link-btn:disabled,
+.pap-edit-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.pap-link-btn--save {
+    font-weight: 800;
+    color: #ff4d00;
+}
