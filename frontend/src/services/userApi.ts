@@ -1,11 +1,10 @@
 import { apiFetch } from "./http";
 
 export type MeDTO = {
-    id: number;
+    id?: number;        // chỉ có nếu entity có id
     username: string;
     fullName?: string;
     phone?: string;
-    email?: string;
     address?: string;
 };
 
@@ -13,9 +12,9 @@ export function getMe() {
     return apiFetch("/api/users/me") as Promise<MeDTO>;
 }
 
-export function upsertMe(body: Partial<MeDTO>) {
+export async function upsertMe(body: Partial<MeDTO>): Promise<MeDTO> {
     return apiFetch("/api/users/me", {
-        method: "POST",
+        method: "PUT",
         body: JSON.stringify(body),
-    }) as Promise<MeDTO>;
+    });
 }

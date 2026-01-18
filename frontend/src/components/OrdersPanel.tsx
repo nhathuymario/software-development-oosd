@@ -11,6 +11,29 @@ type StatusKey =
     | "canceled"
     | "done";
 
+function normalizeStatusKey(raw?: string): StatusKey {
+    const s = (raw ?? "").toUpperCase();
+
+    if (!s) return "pending";
+    if (s.includes("PENDING") || s.includes("WAIT")) return "pending";
+    if (s.includes("CONFIRM")) return "confirmed";
+    if (s.includes("SHIPPING")) return "shipping";
+    if (s.includes("DELIVER")) return "delivering";
+    if (s.includes("CANCEL")) return "canceled";
+    if (s.includes("DONE") || s.includes("SUCCESS") || s.includes("COMPLET") || s.includes("PAID"))
+        return "done";
+
+    // fallback
+    return "pending";
+}
+
+function formatDateVi(iso?: string) {
+    if (!iso) return "";
+    const d = new Date(iso);
+    if (Number.isNaN(d.getTime())) return iso;
+    return d.toLocaleString("vi-VN");
+}
+
 export default function OrdersPanel() {
     const [me, setMe] = useState<MeDTO | null>(null);
     const [orders, setOrders] = useState<OrderDTO[]>([]);
@@ -31,9 +54,10 @@ export default function OrdersPanel() {
                 if (!mounted) return;
                 setMe(meRes);
 
+                // Backend hiện đang hỗ trợ GET /api/orders?userId=...
                 const ordersRes = await getOrdersByUserId(meRes.id);
                 if (!mounted) return;
-                setOrders(ordersRes || []);
+                setOrders(Array.isArray(ordersRes) ? ordersRes : []);
             } catch (e: any) {
                 setErr(e?.message ?? "Load orders failed");
             } finally {
@@ -48,7 +72,7 @@ export default function OrdersPanel() {
 
     const filtered = useMemo(() => {
         if (status === "all") return orders;
-        return orders.filter((o) => (o.status ?? "").toLowerCase() === status);
+        return orders.filter((o) => normalizeStatusKey(o.status) === status);
     }, [orders, status]);
 
     return (
@@ -89,39 +113,45 @@ export default function OrdersPanel() {
             </div>
 
             {loading && <div className="ud-note">Đang tải đơn hàng...</div>}
-            {err && <div className="ud-note" style={{ color: "crimson" }}>{err}</div>}
-
-            {!loading && !err && filtered.length === 0 && (
-                <div className="ud-note">Chưa có đơn hàng nào.</div>
+            {err && (
+                <div className="ud-note" style={{ color: "crimson" }}>
+                    {err}
+                </div>
             )}
 
-            {!loading && !err && filtered.map((o) => (
-                <div className="ud-order" key={String(o.id)}>
-                    <div className="ud-order-top">
-                        <div className="ud-order-code">
-                            <b>Đơn hàng:</b> #{o.code ?? o.id}
-                        </div>
-                        <div className="ud-order-status">{o.status ?? "—"}</div>
-                    </div>
+            {!loading && !err && filtered.length === 0 && <div className="ud-note">Chưa có đơn hàng nào.</div>}
 
-                    <div className="ud-order-body">
-                        <div className="ud-thumb" />
-                        <div className="ud-order-info">
-                            <div className="ud-order-name">Đơn hàng của {me?.username ?? "bạn"}</div>
-                            <div className="ud-order-sub">
-                                {o.createdAt ? `Ngày tạo: ${o.createdAt}` : "Chi tiết sản phẩm backend thêm sau"}
+            {!loading &&
+                !err &&
+                filtered.map((o) => (
+                    <div className="ud-order" key={String(o.id)}>
+                        <div className="ud-order-top">
+                            <div className="ud-order-code">
+                                <b>Đơn hàng:</b> #{o.id}
                             </div>
+
+                            <div className="ud-order-status">{o.status ?? "—"}</div>
                         </div>
 
-                        <div className="ud-order-total">
-                            <div className="ud-muted">Tổng tiền:</div>
-                            <div className="ud-money">
-                                {(o.totalAmount ?? 0).toLocaleString("vi-VN")}đ
+                        <div className="ud-order-body">
+                            <div className="ud-thumb" />
+
+                            <div className="ud-order-info">
+                                <div className="ud-order-name">Đơn hàng của {me?.username ?? "bạn"}</div>
+                                <div className="ud-order-sub">
+                                    {o.createdAt ? `Ngày tạo: ${formatDateVi(o.createdAt)}` : "Chi tiết sản phẩm backend thêm sau"}
+                                </div>
+                            </div>
+
+                            <div className="ud-order-total">
+                                <div className="ud-muted">Tổng tiền:</div>
+                                <div className="ud-money">
+                                    {(o.totalAmount ?? 0).toLocaleString("vi-VN")}đ
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            ))}
+                ))}
         </div>
     );
 }

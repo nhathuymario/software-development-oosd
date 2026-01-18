@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import "../assets/css/pages/LoginPage.css";
 import { useNavigate } from "react-router-dom";
+import { setToken, getRoles } from "../services/auth";
 
 const LoginPage = () => {
     const [username, setUsername] = useState("");
@@ -17,20 +18,18 @@ const LoginPage = () => {
                 password,
             });
 
+            const token: string | undefined = res.data?.token;
+            if (!token) throw new Error("Missing token");
 
-            const token = res.data.token;
-            sessionStorage.setItem("token", token);
+            setToken(token);
 
-            // decode JWT để lấy role (đơn giản)
-            const payload = JSON.parse(atob(token.split(".")[1]));
-            const roles: string[] = payload.roles || [];
+            // ✅ kiểm tra ngay tại đây
+            console.log("token saved:", sessionStorage.getItem("token"));
 
-            if (roles.includes("ROLE_ADMIN")) {
-                navigate("/admin");
-            } else {
-                navigate("/");
-            }
-        } catch (err) {
+            const roles = getRoles();
+            if (roles.includes("ROLE_ADMIN")) navigate("/admin", { replace: true });
+            else navigate("/", { replace: true });
+        } catch {
             alert("Sai tài khoản hoặc mật khẩu");
         }
     };
@@ -60,7 +59,6 @@ const LoginPage = () => {
                 </form>
             </div>
         </div>
-
     );
 };
 

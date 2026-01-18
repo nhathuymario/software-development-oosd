@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import { getMe, upsertMe, type MeDTO } from "../services/userApi";
+import "../assets/css/components/ProfileAddressPanel.css";
+import { getToken } from "../services/auth";
 
 export default function ProfileAddressPanel() {
     const [me, setMe] = useState<MeDTO | null>(null);
-    const [form, setForm] = useState({
+
+    const [address, setAddress] = useState("");
+    const [editingPersonal, setEditingPersonal] = useState(false);
+    const [personalDraft, setPersonalDraft] = useState({
         fullName: "",
         phone: "",
-        email: "",
-        address: "",
     });
 
     const [loading, setLoading] = useState(true);
@@ -23,20 +26,27 @@ export default function ProfileAddressPanel() {
                 setLoading(true);
                 setErr(null);
 
+                // ✅ không có token thì không gọi /me
+                const token = getToken();
+                if (!token) {
+                    setErr("Bạn chưa đăng nhập.");
+                    return;
+                }
+
                 const meRes = await getMe();
                 if (!mounted) return;
 
                 setMe(meRes);
-                setForm({
+                setPersonalDraft({
                     fullName: meRes.fullName ?? "",
                     phone: meRes.phone ?? "",
-                    email: meRes.email ?? "",
-                    address: meRes.address ?? "",
                 });
+                setAddress(meRes.address ?? "");
             } catch (e: any) {
+                // giữ message lỗi, không điều hướng gì cả
                 setErr(e?.message ?? "Load profile failed");
             } finally {
-                setLoading(false);
+                if (mounted) setLoading(false);
             }
         })();
 
@@ -45,17 +55,50 @@ export default function ProfileAddressPanel() {
         };
     }, []);
 
-    const onSave = async () => {
+    const savePersonal = async () => {
+        if (!me) return;
+
         try {
             setSaving(true);
             setMsg(null);
             setErr(null);
 
             const updated = await upsertMe({
-                fullName: form.fullName,
-                phone: form.phone,
-                email: form.email,
-                address: form.address,
+                fullName: personalDraft.fullName,
+                phone: personalDraft.phone,
+                address: me.address ?? "",
+            });
+
+            setMe(updated);
+            setEditingPersonal(false);
+            setMsg("Lưu thành công!");
+        } catch (e: any) {
+            setErr(e?.message ?? "Save failed");
+        } finally {
+            setSaving(false);
+        }
+    };
+
+    const cancelPersonal = () => {
+        setEditingPersonal(false);
+        setPersonalDraft({
+            fullName: me?.fullName ?? "",
+            phone: me?.phone ?? "",
+        });
+    };
+
+    const saveAddress = async () => {
+        if (!me) return;
+
+        try {
+            setSaving(true);
+            setMsg(null);
+            setErr(null);
+
+            const updated = await upsertMe({
+                fullName: me.fullName ?? "",
+                phone: me.phone ?? "",
+                address,
             });
 
             setMe(updated);
@@ -72,69 +115,102 @@ export default function ProfileAddressPanel() {
             <h2 className="ud-title">Thông tin và sổ địa chỉ</h2>
 
             {loading && <div className="ud-note">Đang tải thông tin...</div>}
-            {err && <div className="ud-note" style={{ color: "crimson" }}>{err}</div>}
-            {msg && <div className="ud-note" style={{ color: "#12b76a", fontWeight: 700 }}>{msg}</div>}
+            {err && <div className="ud-note ud-note--error">{err}</div>}
+            {msg && <div className="ud-note ud-note--success">{msg}</div>}
 
             {!loading && !err && (
                 <div className="ud-grid">
+                    {/* THÔNG TIN CÁ NHÂN */}
                     <section className="ud-section">
-                        <h3 className="ud-h3">Thông tin cá nhân</h3>
+                        <h3 className="ud-h3 ud-h3--upper">Thông tin cá nhân</h3>
 
-                        <div className="ud-field">
-                            <label>Họ tên</label>
-                            <input
-                                value={form.fullName}
-                                onChange={(e) => setForm((p) => ({ ...p, fullName: e.target.value }))}
-                                placeholder="VD: Anh Huy"
-                            />
-                        </div>
+                        {!editingPersonal ? (
+                            <div className="pap-row">
+                                <div className="pap-row__text">
+                                    {(me?.fullName ?? "—") + " - " + (me?.phone ?? "—")}
+                                </div>
 
-                        <div className="ud-field">
-                            <label>Số điện thoại</label>
-                            <input
-                                value={form.phone}
-                                onChange={(e) => setForm((p) => ({ ...p, phone: e.target.value }))}
-                                placeholder="VD: 09xxxxxxxx"
-                            />
-                        </div>
+                                <button
+                                    type="button"
+                                    onClick={() => setEditingPersonal(true)}
+                                    className="pap-edit-btn"
+                                >
+                                    <span aria-hidden className="pap-edit-btn__icon">✎</span>
+                                    Sửa
+                                </button>
+                            </div>
+                        ) : (
+                            <div className="pap-edit">
+                                <div className="ud-field pap-edit__field">
+                                    <label>Họ &amp; Tên:</label>
+                                    <input
+                                        value={personalDraft.fullName}
+                                        onChange={(e) =>
+                                            setPersonalDraft((p) => ({ ...p, fullName: e.target.value }))
+                                        }
+                                        placeholder="VD: Anh Huy"
+                                    />
+                                </div>
 
-                        <div className="ud-field">
-                            <label>Email</label>
-                            <input
-                                value={form.email}
-                                onChange={(e) => setForm((p) => ({ ...p, email: e.target.value }))}
-                                placeholder="VD: huy@gmail.com"
-                            />
-                        </div>
+                                <div className="ud-field pap-edit__field">
+                                    <label>Số điện thoại:</label>
+                                    <input
+                                        value={personalDraft.phone}
+                                        onChange={(e) =>
+                                            setPersonalDraft((p) => ({ ...p, phone: e.target.value }))
+                                        }
+                                        placeholder="VD: 09xxxxxxxx"
+                                    />
+                                </div>
 
-                        <button className="ud-primary" type="button" onClick={onSave} disabled={saving}>
-                            {saving ? "Đang lưu..." : "Lưu thông tin"}
-                        </button>
+                                <div className="pap-edit__actions">
+                                    <button
+                                        type="button"
+                                        onClick={cancelPersonal}
+                                        disabled={saving}
+                                        className="pap-link-btn"
+                                    >
+                                        Hủy
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        onClick={savePersonal}
+                                        disabled={saving}
+                                        className="pap-link-btn pap-link-btn--save"
+                                    >
+                                        {saving ? "Đang lưu..." : "Lưu"}
+                                    </button>
+                                </div>
+                            </div>
+                        )}
 
                         <div className="ud-note">
                             UserId: <b>{me?.id}</b>
                         </div>
                     </section>
 
+                    {/* SỔ ĐỊA CHỈ */}
                     <section className="ud-section">
                         <h3 className="ud-h3">Sổ địa chỉ</h3>
 
                         <div className="ud-field">
                             <label>Địa chỉ mặc định</label>
                             <input
-                                value={form.address}
-                                onChange={(e) => setForm((p) => ({ ...p, address: e.target.value }))}
+                                value={address}
+                                onChange={(e) => setAddress(e.target.value)}
                                 placeholder="VD: 12 Nguyễn Trãi, Q1..."
                             />
                         </div>
 
-                        <button className="ud-secondary" type="button" onClick={onSave} disabled={saving}>
+                        <button
+                            className="ud-secondary"
+                            type="button"
+                            onClick={saveAddress}
+                            disabled={saving}
+                        >
                             {saving ? "Đang lưu..." : "Lưu địa chỉ"}
                         </button>
-
-                        <div className="ud-note">
-                            (Sau này nếu bạn tách nhiều địa chỉ) thì đổi field `address` thành list addresses.
-                        </div>
                     </section>
                 </div>
             )}
