@@ -14,13 +14,20 @@ spring:
             - Path=/api/auth/**
 
         # 2. CATALOG SERVICE (Không chặn - Để xem hàng thoải mái)
-        - id: catalog-service
+              # PUBLIC PRODUCTS (không chặn)
+        - id: catalog-products-public
           uri: http://localhost:8085
           predicates:
-            - Path=/api/products/**
+            - Path=/api/products/public/**
+
+              # ADMIN PRODUCTS (chặn)
+        - id: catalog-products-admin
+          uri: http://localhost:8085
+          predicates:
+            - Path=/api/products/admin/**
           filters:
-            - Authentication
-            - name: Authentication
+            - AuthenticationFilter
+            - name: AuthorizationFilter
               args:
                 requiredRole: ROLE_ADMIN
         # 3. USER SERVICE (Không chặn - Hoặc chặn tùy bạn, ở đây tôi để mở cho Cart gọi sang)
