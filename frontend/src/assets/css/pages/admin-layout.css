@@ -1,0 +1,56 @@
+.admin-shell {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    min-height: calc(100vh - 120px); /* nếu bạn đang có header/footer */
+}
+
+.admin-sidebar {
+    border-right: 1px solid #eee;
+    background: #fff;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: sticky;
+    top: 0;
+    height: calc(100vh - 120px);
+}
+
+.admin-brand {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 12px;
+    border: 1px solid #f1f1f1;
+}
+
+.admin-logo {
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    background: #ffd000;
+}
+
+.admin-brand-title { font-weight: 800; }
+.admin-brand-sub { font-size: 12px; opacity: .7; margin-top: 2px; }
+
+.admin-nav { display: flex; flex-direction: column; gap: 8px; }
+
+.nav-item {
+    padding: 10px 12px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #111;
+    border: 1px solid #f1f1f1;
+    background: #fff;
+}
+.nav-item:hover { filter: brightness(0.98); }
+.nav-item.active { border-color: #111; background: #111; color: #fff; }
+
+.admin-sidebar-footer { margin-top: auto; display: grid; gap: 8px; }
+
+.admin-main { padding: 16px; background: #fafafa; }
+
+.w-full { width: 100%; }

@@ -1,0 +1,17 @@
+.btn {
+    padding: 9px 12px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    background: #fff;
+    cursor: pointer;
+}
+.btn.primary { border-color: #111; background: #111; color: #fff; }
+.btn.danger { border-color: #c1121f; background: #c1121f; color: #fff; }
+.btn:disabled { opacity: .55; cursor: not-allowed; }
+
+.input {
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    outline: none;
+}

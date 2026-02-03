@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { logout } from "../services/auth";
+import { logout, hasRole, getRoles } from "../services/auth";
 
-export type TabKey = "orders" | "profile";
+export type TabKey = "orders" | "profile" | "dashboard";
 
 export default function UserSidebar({
                                         username,
@@ -14,9 +14,18 @@ export default function UserSidebar({
 }) {
     const navigate = useNavigate();
 
+    const isAdmin =
+        (typeof hasRole === "function" && (hasRole("ROLE_ADMIN") || hasRole("ADMIN"))) ||
+        (typeof getRoles === "function" &&
+            (getRoles().includes("ROLE_ADMIN") || getRoles().includes("ADMIN")));
+
     const handleLogout = () => {
         logout();
         navigate("/login");
+    };
+
+    const goAdminDashboard = () => {
+        navigate("/admin/products/new", { replace: true });
     };
 
     return (
@@ -30,14 +39,26 @@ export default function UserSidebar({
             </div>
 
             <nav className="ud-nav">
-                <button
-                    className={`ud-nav-item ${tab === "orders" ? "active" : ""}`}
-                    onClick={() => onChangeTab("orders")}
-                >
-                    <span className="ud-nav-ico">🧾</span>
-                    <span>Đơn hàng đã mua</span>
-                </button>
+                {/* ✅ ADMIN: Dashboard | USER: Orders */}
+                {isAdmin ? (
+                    <button
+                        className={`ud-nav-item ${tab === "dashboard" ? "active" : ""}`}
+                        onClick={goAdminDashboard}
+                    >
+                        <span className="ud-nav-ico">📊</span>
+                        <span>Dashboard</span>
+                    </button>
+                ) : (
+                    <button
+                        className={`ud-nav-item ${tab === "orders" ? "active" : ""}`}
+                        onClick={() => onChangeTab("orders")}
+                    >
+                        <span className="ud-nav-ico">🧾</span>
+                        <span>Đơn hàng đã mua</span>
+                    </button>
+                )}
 
+                {/* ✅ Cả admin/user đều thấy profile */}
                 <button
                     className={`ud-nav-item ${tab === "profile" ? "active" : ""}`}
                     onClick={() => onChangeTab("profile")}
