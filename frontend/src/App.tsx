@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
-import HomePage from "./pages/home/HomePage";
+import HomePage from "./pages/home/ProductsPublicPage.tsx";
 import LoginPage from "./pages/LoginPage";
 import ForbiddenPage from "./pages/ForbiddenPage/ForbiddenPage";
 import ProtectedRoute from "./components/ProtectedRoute";
