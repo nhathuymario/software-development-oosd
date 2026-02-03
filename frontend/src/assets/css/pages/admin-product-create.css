@@ -84,3 +84,19 @@
     opacity: 0.55;
     cursor: not-allowed;
 }
+
+.ap-preview {
+    margin-top: 10px;
+    border: 1px dashed #ddd;
+    border-radius: 12px;
+    padding: 10px;
+    background: #fafafa;
+}
+
+.ap-preview img {
+    width: 100%;
+    max-height: 220px;
+    object-fit: contain;
+    display: block;
+    border-radius: 10px;
+}

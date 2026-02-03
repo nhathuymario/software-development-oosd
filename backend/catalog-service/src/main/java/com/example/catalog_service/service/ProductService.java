@@ -5,8 +5,12 @@ import com.example.catalog_service.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Service
@@ -27,9 +31,31 @@ public class ProductService {
     }
 
     // ADMIN
-    public Product createProduct(Product product) {
+
+
+
+    public Product createProductWithImage(Product product, MultipartFile image) {
+        if (image != null && !image.isEmpty()) {
+            try {
+                String uploadDir = "uploads/products/";
+                Files.createDirectories(Paths.get(uploadDir));
+
+                String filename = System.currentTimeMillis() + "_" +
+                        image.getOriginalFilename().replaceAll("\\s+", "_");
+
+                Path path = Paths.get(uploadDir).resolve(filename);
+                Files.write(path, image.getBytes());
+
+                // ✅ URL public để FE load
+                product.setImageUrl("/uploads/products/" + filename);
+            } catch (Exception e) {
+                throw new RuntimeException("Upload image failed: " + e.getMessage());
+            }
+        }
         return productRepository.save(product);
     }
+
+
 
     // ADMIN
     @Transactional
@@ -99,4 +125,6 @@ public class ProductService {
         }
         return productRepository.findAll();
     }
+
+
 }

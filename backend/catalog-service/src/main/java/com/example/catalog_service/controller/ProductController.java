@@ -3,9 +3,11 @@ package com.example.catalog_service.controller;
 import com.example.catalog_service.entity.Product;
 import com.example.catalog_service.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -50,10 +52,20 @@ public class ProductController {
 
     // POST /api/products/admin
     @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping("/admin")
-    public Product create(@RequestBody Product product) {
-        return productService.createProduct(product);
+    @PostMapping(value = "/admin", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public Product create(
+            @RequestParam("name") String name,
+            @RequestParam("price") BigDecimal price,
+            @RequestParam("stock") Integer stock,
+            @RequestParam(value = "image", required = false) MultipartFile image
+    ) {
+        Product p = new Product();
+        p.setName(name);
+        p.setPrice(price);
+        p.setStock(stock);
+        return productService.createProductWithImage(p, image);
     }
+
 
     // PUT /api/products/admin/{id}
     @PreAuthorize("hasRole('ADMIN')")

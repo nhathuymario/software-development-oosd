@@ -20,7 +20,6 @@ spring:
           uri: http://localhost:8085
           predicates:
             - Path=/api/products/public/**
-
         # ADMIN PRODUCTS (cần login + role ADMIN nếu bạn muốn)
         - id: catalog-products-admin
           uri: http://localhost:8085
@@ -30,6 +29,11 @@ spring:
             - name: Authentication
               args:
                 requiredRole: ROLE_ADMIN
+        #upload file
+        - id: catalog-uploads
+          uri: http://localhost:8085
+          predicates:
+            - Path=/uploads/**
 
         # 3. USER SERVICE
         # /me cần login
@@ -77,6 +81,10 @@ spring:
 jwt:
   secret: "my-super-secret-key-which-is-at-least-32-chars!"
 
+app:
+
+  upload:
+    base-dir: "src/main/resources/uploads"
 
 management:
   endpoints:
