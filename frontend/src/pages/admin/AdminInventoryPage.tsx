@@ -1,3 +1,4 @@
+//tồn kho
 export default function AdminInventoryPage() {
     return (
         <div className="card" style={{ padding: 14 }}>

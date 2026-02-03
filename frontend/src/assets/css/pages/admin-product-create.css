@@ -1,0 +1,86 @@
+/* ===== Admin Create Product Page ===== */
+
+.ap-create {
+    padding: 24px;
+}
+
+.ap-card {
+    max-width: 520px;
+    background: #ffffff;
+    border-radius: 14px;
+    border: 1px solid #eee;
+    padding: 20px 22px 22px;
+}
+
+.ap-title {
+    margin: 0 0 16px;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.ap-form {
+    display: grid;
+    gap: 14px;
+}
+
+.ap-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.ap-label {
+    font-size: 13px;
+    font-weight: 600;
+    opacity: 0.85;
+}
+
+.ap-input {
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.ap-input:focus {
+    border-color: #111;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
+}
+
+.ap-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 6px;
+}
+
+/* ===== Buttons ===== */
+
+.ap-btn {
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    background: #fff;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.ap-btn:hover {
+    filter: brightness(0.97);
+}
+
+.ap-btn.primary {
+    background: #111;
+    color: #fff;
+    border-color: #111;
+}
+
+.ap-btn.secondary {
+    background: #f5f5f5;
+}
+
+.ap-btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}

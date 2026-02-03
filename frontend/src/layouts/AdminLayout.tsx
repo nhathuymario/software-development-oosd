@@ -13,13 +13,13 @@ export default function AdminLayout() {
     return (
         <div className="admin-shell">
             <aside className="admin-sidebar">
-                <div className="admin-brand" onClick={() => nav("/admin")}>
-                    <div className="admin-logo" />
-                    <div>
-                        <div className="admin-brand-title">MiniStore</div>
-                        <div className="admin-brand-sub">Admin Panel</div>
-                    </div>
-                </div>
+                {/*<div className="admin-brand" onClick={() => nav("/admin")}>*/}
+                {/*    <div className="admin-logo" />*/}
+                {/*    <div>*/}
+                {/*        <div className="admin-brand-title">MiniStore</div>*/}
+                {/*        <div className="admin-brand-sub">Admin Panel</div>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
 
                 <nav className="admin-nav">
                     <NavLink to="/admin/products/new" className={({ isActive }) => (isActive ? "nav-item active" : "nav-item")}>

@@ -4,73 +4,79 @@ server:
 spring:
   application:
     name: gateway-service
+
   cloud:
     gateway:
       routes:
-        # 1. AUTH SERVICE (Không chặn - Để người ta còn đăng nhập)
+        # 1. AUTH SERVICE (public)
         - id: auth-service
           uri: http://localhost:8081
           predicates:
             - Path=/api/auth/**
 
-        # 2. CATALOG SERVICE (Không chặn - Để xem hàng thoải mái)
-              # PUBLIC PRODUCTS (không chặn)
+        # 2. CATALOG SERVICE
+        # PUBLIC PRODUCTS (public)
         - id: catalog-products-public
           uri: http://localhost:8085
           predicates:
             - Path=/api/products/public/**
 
-              # ADMIN PRODUCTS (chặn)
+        # ADMIN PRODUCTS (cần login + role ADMIN nếu bạn muốn)
         - id: catalog-products-admin
           uri: http://localhost:8085
           predicates:
             - Path=/api/products/admin/**
           filters:
-            - AuthenticationFilter
-            - name: AuthorizationFilter
+            - name: Authentication
               args:
                 requiredRole: ROLE_ADMIN
-        # 3. USER SERVICE (Không chặn - Hoặc chặn tùy bạn, ở đây tôi để mở cho Cart gọi sang)
-        - id: user-service
+
+        # 3. USER SERVICE
+        # /me cần login
+        - id: user-me
+          uri: http://localhost:8086
+          predicates:
+            - Path=/api/users/me
+          filters:
+            - Authentication
+
+        # các endpoint user khác public (tuỳ bạn)
+        - id: user-public
           uri: http://localhost:8086
           predicates:
             - Path=/api/users/**
 
-        # ----------------------------------------------------
-        # NHỮNG SERVICE CẦN ĐĂNG NHẬP (THÊM filters: AuthenticationFilter)
-        # ----------------------------------------------------
-
-        # 4. CART SERVICE (Cần đăng nhập)
+        # 4. CART SERVICE (cần login + ROLE_USER nếu bạn muốn)
         - id: cart-service
           uri: http://localhost:8082
           predicates:
             - Path=/api/cart/**
           filters:
-          - Authentication
-          - name: Authentication
-            args:
-              requiredRole: ROLE_USER
+            - name: Authentication
+              args:
+                requiredRole: ROLE_USER
 
-        # 5. ORDER SERVICE (Cần đăng nhập)
+        # 5. ORDER SERVICE (cần login + ROLE_USER nếu bạn muốn)
         - id: order-service
           uri: http://localhost:8083
           predicates:
             - Path=/api/orders/**
           filters:
-            - Authentication
             - name: Authentication
-              args:
-                requiredRole: ROLE_USER
-        # 6. PAYMENT SERVICE (Cần đăng nhập)
+
+        # 6. PAYMENT SERVICE (cần login + ROLE_USER nếu bạn muốn)
         - id: payment-service
           uri: http://localhost:8084
           predicates:
             - Path=/api/payments/**
           filters:
-            - Authentication
             - name: Authentication
               args:
                 requiredRole: ROLE_USER
+
+jwt:
+  secret: "my-super-secret-key-which-is-at-least-32-chars!"
+
 
 management:
   endpoints:
@@ -78,8 +84,6 @@ management:
       exposure:
         include: health,info
 
-
-# THÊM ĐOẠN NÀY ĐỂ TẮT EUREKA
 eureka:
   client:
     enabled: false

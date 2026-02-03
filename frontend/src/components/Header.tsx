@@ -17,7 +17,7 @@ const Header = () => {
             {/* LEFT */}
             <div className="header-left">
                 <div className="logo-placeholder"></div>
-                <span className="shop-name">MiniStore</span>
+                <span className="shop-name">Bà bảy shop</span>
             </div>
 
             {/* CENTER */}
