@@ -6,6 +6,8 @@ import ForbiddenPage from "./pages/ForbiddenPage/ForbiddenPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import UserDetailPage from "./pages/user/UserDetailPage";
 
+import AdminArticlesPage from "./pages/admin/AdminArticlesPage"
+import AdminBannersPage from "./pages/admin/AdminBannersPage"
 import AdminLayout from "./layouts/AdminLayout";
 import AdminOrdersPage from "./pages/admin/AdminOrdersPage";
 import AdminProductCreatePage from "./pages/admin/AdminProductCreatePage";
@@ -32,6 +34,8 @@ function App() {
                         <Route path="products/new" element={<AdminProductCreatePage />} />
                         <Route path="inventory" element={<AdminInventoryPage />} />
                         <Route path="orders" element={<AdminOrdersPage />} />
+                        <Route path="content/articles" element={<AdminArticlesPage />} />
+                        <Route path="content/banners" element={<AdminBannersPage />} />
                     </Route>
 
                     <Route

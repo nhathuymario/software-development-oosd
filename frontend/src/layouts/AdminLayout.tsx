@@ -33,6 +33,15 @@ export default function AdminLayout() {
                     <NavLink to="/admin/orders" className={({ isActive }) => (isActive ? "nav-item active" : "nav-item")}>
                         🧾 Đơn hàng
                     </NavLink>
+
+                    <NavLink to="/admin/content/articles" className={({ isActive }) => (isActive ? "nav-item active" : "nav-item")}>
+                        📰 Bài viết
+                    </NavLink>
+
+                    <NavLink to="/admin/content/banners" className={({ isActive }) => (isActive ? "nav-item active" : "nav-item")}>
+                        📢 Banner
+                    </NavLink>
+
                 </nav>
 
                 <div className="admin-sidebar-footer">
