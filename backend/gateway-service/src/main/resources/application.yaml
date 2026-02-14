@@ -67,8 +67,23 @@ spring:
             - Path=/api/orders/**
           filters:
             - name: Authentication
+        # 6. CONTENT SERVICE
+        # CONTENT PUBLIC
+        - id: content-public
+          uri: http://localhost:8087
+          predicates:
+          - Path=/api/content/public/**
 
-        # 6. PAYMENT SERVICE (cần login + ROLE_USER nếu bạn muốn)
+  # CONTENT ADMIN (cần login + role ADMIN)
+        - id: content-admin
+          uri: http://localhost:8087
+          predicates:
+          - Path=/api/content/admin/**
+          filters:
+          - name: Authentication
+            args:
+              requiredRole: ROLE_ADMIN
+        # 7. PAYMENT SERVICE (cần login + ROLE_USER nếu bạn muốn)
         - id: payment-service
           uri: http://localhost:8084
           predicates:
