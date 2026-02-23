@@ -65,3 +65,26 @@
     object-fit: cover;
     display: block;
 }
+/* Modal card giới hạn chiều cao màn hình */
+.ac-modal-card{
+    max-height: calc(100vh - 24px);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Cho phần form scroll */
+.ac-form{
+    overflow: auto;
+    padding-bottom: 12px;
+}
+
+/* Giữ hàng nút ở dưới luôn thấy */
+.ac-actions{
+    position: sticky;
+    bottom: 0;
+    background: #fff;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: 1px solid #f0f0f0;
+    margin-top: 8px;
+}

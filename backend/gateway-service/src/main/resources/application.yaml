@@ -30,10 +30,10 @@ spring:
               args:
                 requiredRole: ROLE_ADMIN
         #upload file
-        - id: catalog-uploads
+        - id: catalog-uploads-products
           uri: http://localhost:8085
           predicates:
-            - Path=/uploads/**
+            - Path=/uploads/products/**
 
         # 3. USER SERVICE
         # /me cần login
@@ -68,21 +68,28 @@ spring:
           filters:
             - name: Authentication
         # 6. CONTENT SERVICE
+        # CONTENT UPLOADS (PUBLIC GET)
+        - id: content-uploads
+          uri: http://localhost:8087
+          predicates:
+            - Path=/uploads/content/**
+
         # CONTENT PUBLIC
         - id: content-public
           uri: http://localhost:8087
           predicates:
-          - Path=/api/content/public/**
+            - Path=/api/content/public/**
 
-  # CONTENT ADMIN (cần login + role ADMIN)
+        # CONTENT ADMIN (cần login + role ADMIN)
         - id: content-admin
           uri: http://localhost:8087
           predicates:
-          - Path=/api/content/admin/**
+            - Path=/api/content/admin/**
           filters:
-          - name: Authentication
-            args:
-              requiredRole: ROLE_ADMIN
+            - name: Authentication
+              args:
+                requiredRole: ROLE_ADMIN
+
         # 7. PAYMENT SERVICE (cần login + ROLE_USER nếu bạn muốn)
         - id: payment-service
           uri: http://localhost:8084
@@ -96,10 +103,10 @@ spring:
 jwt:
   secret: "my-super-secret-key-which-is-at-least-32-chars!"
 
-app:
-
-  upload:
-    base-dir: "src/main/resources/uploads"
+#app:
+#
+#  upload:
+#    base-dir: "src/main/resources/uploads"
 
 management:
   endpoints:

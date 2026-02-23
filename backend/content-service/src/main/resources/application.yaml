@@ -1,11 +1,11 @@
 server:
-  port: 8085
+  port: 8087
 
 spring:
   application:
-    name: catalog-service
+    name: content-service
   datasource:
-    url: jdbc:mysql://localhost:3306/catalog_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/content_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
     username: root
     password: 123456
   jpa:
@@ -18,8 +18,9 @@ spring:
       max-file-size: 10MB
       max-request-size: 10MB
 app:
-  upload-dir: "uploads/products"
-
+  upload-dir: "uploads/content"
+  # hoặc Windows tuyệt đối:
+  # upload-dir: "C:/oosd/uploads/content"
 eureka:
   client:
     enabled: false # Tắt Eureka cho đỡ lỗi

@@ -2,12 +2,11 @@ package com.example.content_service.controller;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.util.StringUtils;
 
-import java.io.File;
-import java.nio.file.Files;
+import java.nio.file.*;
 import java.util.Map;
 import java.util.UUID;
 
@@ -20,24 +19,31 @@ public class UploadController {
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Map<String, String> upload(@RequestPart("file") MultipartFile file) throws Exception {
-        if (file.isEmpty()) throw new RuntimeException("File rỗng");
+        if (file == null || file.isEmpty()) {
+            throw new RuntimeException("File rỗng");
+        }
 
-        String original = StringUtils.cleanPath(file.getOriginalFilename() == null ? "file" : file.getOriginalFilename());
+        String original = StringUtils.cleanPath(
+                file.getOriginalFilename() == null ? "file" : file.getOriginalFilename()
+        );
+
         String ext = "";
         int dot = original.lastIndexOf('.');
-        if (dot >= 0) ext = original.substring(dot);
+        if (dot >= 0 && dot < original.length() - 1) {
+            ext = original.substring(dot);
+        }
 
         String filename = UUID.randomUUID() + ext;
 
-        File dir = new File(uploadDir);
-        if (!dir.exists()) dir.mkdirs();
+        // ✅ Dùng NIO + absolute path cho chắc
+        Path dir = Paths.get(uploadDir).toAbsolutePath().normalize();
+        Files.createDirectories(dir);
 
-        File dest = new File(dir, filename);
-        file.transferTo(dest);
+        Path dest = dir.resolve(filename);
+        file.transferTo(dest.toFile());
 
-        // URL public để FE dùng (đi qua gateway)
-        String url = "/uploads/" + filename;
-
-        return Map.of("url", url);
+// URL public qua gateway
+        String url = "http://localhost:8080/uploads/content/" + filename;
+        return Map.of("url", url, "filename", filename);
     }
 }
