@@ -56,25 +56,28 @@ export type BannerUpsertRequest = {
 }
 
 export type UploadResponse = { url: string }
+
+// ===== Base paths (để khỏi gõ lặp) =====
+const PUBLIC_BASE = "/api/content/public"
+const ADMIN_BASE = "/api/content/admin"
+
 // =====================
 // PUBLIC APIs
 // =====================
 
 export function getPublicArticles(page = 0, size = 8) {
     return apiFetch<PageResponse<ArticleResponse>>(
-        `/content/public/articles?page=${page}&size=${size}`
+        `${PUBLIC_BASE}/articles?page=${page}&size=${size}`
     )
 }
 
 export function getPublicArticleDetail(id: number) {
-    return apiFetch<ArticleResponse>(
-        `/content/public/articles/${id}`
-    )
+    return apiFetch<ArticleResponse>(`${PUBLIC_BASE}/articles/${id}`)
 }
 
 export function getPublicBanners(position: string) {
     return apiFetch<BannerResponse[]>(
-        `/content/public/banners?position=${encodeURIComponent(position)}`
+        `${PUBLIC_BASE}/banners?position=${encodeURIComponent(position)}`
     )
 }
 
@@ -84,32 +87,30 @@ export function getPublicBanners(position: string) {
 
 export function adminGetArticles(page = 0, size = 20) {
     return apiFetch<PageResponse<ArticleResponse>>(
-        `/content/admin/articles?page=${page}&size=${size}`
+        `${ADMIN_BASE}/articles?page=${page}&size=${size}`
     )
 }
 
 export function adminGetArticleDetail(id: number) {
-    return apiFetch<ArticleResponse>(
-        `/content/admin/articles/${id}`
-    )
+    return apiFetch<ArticleResponse>(`${ADMIN_BASE}/articles/${id}`)
 }
 
 export function adminCreateArticle(payload: ArticleUpsertRequest) {
-    return apiFetch<ArticleResponse>(`/content/admin/articles`, {
+    return apiFetch<ArticleResponse>(`${ADMIN_BASE}/articles`, {
         method: "POST",
         body: JSON.stringify(payload),
     })
 }
 
 export function adminUpdateArticle(id: number, payload: ArticleUpsertRequest) {
-    return apiFetch<ArticleResponse>(`/content/admin/articles/${id}`, {
+    return apiFetch<ArticleResponse>(`${ADMIN_BASE}/articles/${id}`, {
         method: "PUT",
         body: JSON.stringify(payload),
     })
 }
 
 export function adminDeleteArticle(id: number) {
-    return apiFetch<void>(`/content/admin/articles/${id}`, {
+    return apiFetch<void>(`${ADMIN_BASE}/articles/${id}`, {
         method: "DELETE",
     })
 }
@@ -117,38 +118,39 @@ export function adminDeleteArticle(id: number) {
 // ===== Banner ADMIN =====
 
 export function adminGetBanners() {
-    return apiFetch<BannerResponse[]>(`/content/admin/banners`)
+    return apiFetch<BannerResponse[]>(`${ADMIN_BASE}/banners`)
 }
 
 export function adminGetBannerDetail(id: number) {
-    return apiFetch<BannerResponse>(`/content/admin/banners/${id}`)
+    return apiFetch<BannerResponse>(`${ADMIN_BASE}/banners/${id}`)
 }
 
 export function adminCreateBanner(payload: BannerUpsertRequest) {
-    return apiFetch<BannerResponse>(`/content/admin/banners`, {
+    return apiFetch<BannerResponse>(`${ADMIN_BASE}/banners`, {
         method: "POST",
         body: JSON.stringify(payload),
     })
 }
 
 export function adminUpdateBanner(id: number, payload: BannerUpsertRequest) {
-    return apiFetch<BannerResponse>(`/content/admin/banners/${id}`, {
+    return apiFetch<BannerResponse>(`${ADMIN_BASE}/banners/${id}`, {
         method: "PUT",
         body: JSON.stringify(payload),
     })
 }
 
 export function adminDeleteBanner(id: number) {
-    return apiFetch<void>(`/content/admin/banners/${id}`, {
+    return apiFetch<void>(`${ADMIN_BASE}/banners/${id}`, {
         method: "DELETE",
     })
 }
+
 // ===== Upload ADMIN =====
 export function adminUploadFile(file: File) {
     const fd = new FormData()
     fd.append("file", file)
 
-    return apiFetch<UploadResponse>("/api/content/admin/uploads", {
+    return apiFetch<UploadResponse>(`${ADMIN_BASE}/uploads`, {
         method: "POST",
         body: fd,
     })

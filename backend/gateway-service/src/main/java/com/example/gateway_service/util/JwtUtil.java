@@ -8,7 +8,8 @@ import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Component
 public class JwtUtil {
@@ -16,27 +17,48 @@ public class JwtUtil {
     @Value("${jwt.secret}")
     private String secret;
 
-    private Key getSignKey() {
+    private Key getSigningKey() {
         return Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
     }
 
-    public Claims getClaims(String token) {
-        return Jwts.parserBuilder()
-                .setSigningKey(getSignKey())
+    public void validateToken(String token) {
+        Jwts.parserBuilder()
+                .setSigningKey(getSigningKey())
                 .build()
-                .parseClaimsJws(token)
-                .getBody();
+                .parseClaimsJws(token);
     }
 
     public List<String> getRoles(String token) {
-        Object roles = getClaims(token).get("roles");
-        if (roles instanceof List<?> list) {
-            return list.stream().map(String::valueOf).toList();
+        Claims claims = parseClaims(token);
+
+        Object rs = claims.get("roles");
+        if (rs == null) return Collections.emptyList();
+
+        if (rs instanceof List<?>) {
+            List<?> raw = (List<?>) rs;
+            return raw.stream()
+                    .map(String::valueOf)
+                    .collect(Collectors.toList());
         }
-        return List.of();
+
+        String s = String.valueOf(rs);
+        if (s.isBlank()) return Collections.emptyList();
+
+        if (s.contains(",")) {
+            return Arrays.stream(s.split(","))
+                    .map(String::trim)
+                    .filter(x -> !x.isBlank())
+                    .collect(Collectors.toList());
+        }
+
+        return Collections.singletonList(s.trim());
     }
 
-    public void validateToken(String token) {
-        getClaims(token);
+    private Claims parseClaims(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(getSigningKey())
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
     }
 }

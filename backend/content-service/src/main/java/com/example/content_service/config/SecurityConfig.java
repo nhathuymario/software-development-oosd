@@ -15,14 +15,11 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
 
                 .authorizeHttpRequests(auth -> auth
-                        // ✅ Ảnh upload public
                         .requestMatchers("/uploads/**").permitAll()
-
-                        // Public content
                         .requestMatchers("/api/content/public/**").permitAll()
 
-                        // Admin content cần ADMIN
-                        .requestMatchers("/api/content/admin/**").hasRole("ADMIN")
+                        // ✅ để gateway bảo vệ, content-service cho qua
+                        .requestMatchers("/api/content/admin/**").permitAll()
 
                         .anyRequest().authenticated()
                 )
